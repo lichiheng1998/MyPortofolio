@@ -7,7 +7,7 @@ class RollingCard extends React.Component {
         return (
             <div className={`card ${styles.level}`}>
               <div className="card-image">
-                <figure className="image is-4by4">
+                <figure className="image is-square">
                   <img src={this.props.imgUrl} alt=""/>
                 </figure>
               </div>
