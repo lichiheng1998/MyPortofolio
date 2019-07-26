@@ -3,7 +3,7 @@ import styles from "./Planguages.module.css";
 import RollingCard from "./RollingCard";
 import languages from "../models/languages";
 import Slider from "react-slick";
-import Slide from "react-reveal/Slide";
+import Fade from "react-reveal/Fade";
 
 class Languages extends React.Component {
     constructor(){
@@ -57,9 +57,11 @@ class Languages extends React.Component {
 
         return (
                 <div className={styles.wrapper}>
-                    <Slider {...this.settings}>
-                        {component}
-                    </ Slider>
+                    <Fade when={this.state.render} big>
+                        <Slider {...this.settings}>
+                            {component}
+                        </ Slider>
+                    </Fade>
                 </div>
         );
     }
