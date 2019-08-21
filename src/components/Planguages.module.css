@@ -5,9 +5,14 @@
     margin: 0 !important;
 }
 
-.wrapper {
+.wrapper, .wrapper3{
      margin: 0;
      position: relative;
+}
+
+.wrapper2 {
+    margin: 10px;
+    position: relative;
 }
 
 .level {
@@ -47,9 +52,21 @@
     align-items: center;
 }
 
+@media only screen and (min-width: 650px) {
+
+    .wrapper2, .wrapper3{
+        margin: 0 5%;
+    }
+}
+
+
 @media only screen and (min-width: 768px) {
     .cardcontent {
         padding: 15px;
+    }
+
+    .wrapper2, .wrapper3{
+        margin: 0 15%;
     }
 }
 
@@ -58,16 +75,14 @@
          margin: 0 5%;
     }
 
+    .wrapper2, .wrapper3{
+        margin: 0 20%;
+    }
+
     .cardcontent {
         padding: 24px;
     }
     .responsiveIcon {
         font-size: 50px;
-    }
-}
-
-@media only screen and (min-width: 1200px) {
-    .wrapper {
-         margin: 0 5%;
     }
 }

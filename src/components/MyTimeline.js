@@ -5,7 +5,6 @@ import eduList from "../models/educations";
 import expList from "../models/experiences";
 import Events from "./Events";
 import Title from "./Title";
-import Fade from 'react-reveal/Fade';
 
 const MyTimeline = () => {
     let component = eduList.map((education) => {

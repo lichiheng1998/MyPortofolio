@@ -1,3 +1,8 @@
+<label className="label">Content</label>
+<div className="control">
+  <textarea name="content" onChange={props.handleInputChange} value={props.data.content} className="textarea" placeholder="Textarea"></textarea>
+</div>
+
 <!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
 <p align="center">
   <a href="https://www.gatsbyjs.org">

@@ -67,3 +67,9 @@ transition: .5s;
     animation: cd-bounce-2-inverse 0.6s;
   }
 }
+
+.react-mde .grip .icon {
+    height: 10px !important;
+    display: block !important;
+    margin: 0 auto !important;
+}

@@ -1,5 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
+import Helmet from "react-helmet"
+import { withPrefix } from "gatsby"
 
 export default function HTML(props) {
   return (
@@ -11,8 +13,8 @@ export default function HTML(props) {
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.js"></script>
+        <script src='/static/headroom.js' type="text/javascript" />
+        <script src='/static/jQuery.headroom.js' type="text/javascript" />
         {props.headComponents}
       </head>
       <body {...props.bodyAttributes}>

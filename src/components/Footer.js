@@ -19,7 +19,7 @@ export default class Footer extends React.Component{
     }
     render(){
         return (
-            <footer className={`section has-text-centered ${styles.footer}`}>
+            <footer style={this.props.style} className={`section has-text-centered ${styles.footer}`}>
               <div className={`${styles.icons}`}>
                 <LightSpeed right>
                     <a href="https://github.com/lichiheng1998"><FontAwesomeIcon className={styles.icon} icon={faGithub} /></a>
@@ -32,14 +32,14 @@ export default class Footer extends React.Component{
                 <br/>
                 <span className={styles.name}>{"Chiheng Li © 2019, Crafted with "}
                 <a href="https://reactjs.org/">react</a> and <a href="https://bulma.io/">bulma</a></span>
-                <div id="weixin" class="modal">
-                  <div class="modal-background"></div>
-                  <div class="modal-content">
-                    <p class="image is-3by3">
+                <div id="weixin" className="modal">
+                  <div className="modal-background"></div>
+                  <div className="modal-content">
+                    <p className="image is-3by3">
                       <img src={QRcode} alt="My wechat QRcode"/>
                     </p>
                   </div>
-                  <button class="modal-close is-large" onClick={this.toggle} aria-label="close"></button>
+                  <button className="modal-close is-large" onClick={this.toggle} aria-label="close"></button>
                 </div>
             </footer>
         );

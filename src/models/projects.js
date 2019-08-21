@@ -1,4 +1,14 @@
 const projects = {
+    "angrySun": {
+        title: "Angry Sun",
+        description: "\"Angry Sun\" is an entertaining 2d physical emulatation game developed with the " +
+        "libgdx Framework as well as box2d physical engine. Rendered with the OpenGL apis, " +
+        "the characters in the game are animated with multiple tilemap animations.",
+        tech: ["Java", "Libgdx", "OpenGL", "Box2d"],
+        isPhone: false,
+        numSnap: 4,
+        link: "https://github.com/lichiheng1998/AngrySun"
+    },
     "arFinder": {
         title: "AR Finder",
         description: "\"AR Finder\" is a an application which utilizes multiple sensors " +
@@ -9,16 +19,6 @@ const projects = {
         isPhone: true,
         numSnap: 3,
         link: "https://github.com/lichiheng1998/ARFind"
-    },
-    "angrySun": {
-        title: "Angry Sun",
-        description: "\"Angry Sun\" is an entertaining 2d physical emulatation game developed with the " +
-        "libgdx Framework as well as box2d physical engine. Rendered with the OpenGL apis, " +
-        "the characters in the game are animated with multiple tilemap animations.",
-        tech: ["Java", "Libgdx", "OpenGL", "Box2d"],
-        isPhone: false,
-        numSnap: 4,
-        link: "https://github.com/lichiheng1998/AngrySun"
     },
     "myClass": {
         title: "My Class",
