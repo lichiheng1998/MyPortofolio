@@ -77,6 +77,9 @@ class blogs extends React.Component {
             return results.json();
         }).then(data => {
             if(this._isMounted && data){
+                toast.success("Blogs are loaded.", {
+                    position: toast.POSITION.TOP_CENTER
+                });
                 if (data.length !== 0){
                     this.setState((prev) => {
                         prev.footerStyle = {};
@@ -86,7 +89,7 @@ class blogs extends React.Component {
                 }
             };
         }).catch(err => {
-            toast.error("Fail to fetch data.", {
+            toast.error("Failed to fetch data.", {
                 position: toast.POSITION.TOP_CENTER
             });
         }).finally(()=>{
@@ -105,7 +108,7 @@ class blogs extends React.Component {
         if(isAuthenticated()){
             navigate("/upload");
         } else {
-            toast.warning("Please login in first", {
+            toast.warning("Please login in first.", {
                 position: toast.POSITION.TOP_CENTER
             });
         }
