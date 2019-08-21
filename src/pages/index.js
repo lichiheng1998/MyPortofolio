@@ -10,10 +10,11 @@ import ProjectBanner from "../components/ProjectBanner";
 import Footer from "../components/Footer";
 import { Helmet } from "react-helmet";
 import config from 'react-reveal/globals';
+import { graphql } from "gatsby";
 
 config({ ssrFadeout: true });
 
-const IndexPage = () => (
+const IndexPage = ({data}) => (
     <div>
         <Helmet>
           <meta charSet="utf-8" />
@@ -21,13 +22,57 @@ const IndexPage = () => (
           <link rel="canonical" href="http://mysite.com/example" />
         </Helmet>
         <Navbar />
-        <Banner />
+        <Banner images={data.bannerImages}/>
         <MyTimeline />
-        <Skills />
-        <ProjectBanner />
-        <Project />
+        <Skills images={data.languageImages}/>
+        <ProjectBanner images={data.bannerImages}/>
+        <Project images={data.sanpshotImages} />
         <Footer />
     </div>
 );
 
 export default IndexPage;
+
+export const query = graphql`
+  query {
+    bannerImages: allFile(filter: {relativeDirectory: {eq: "banners"}}) {
+      edges {
+        node {
+          relativePath
+          name
+          childImageSharp {
+            fluid {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+      }
+    }
+    sanpshotImages: allFile(filter: {relativeDirectory: {eq: "snapshots"}}) {
+      edges {
+        node {
+          relativePath
+          name
+          childImageSharp {
+            fluid {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+      }
+    }
+    languageImages: allFile(filter: {relativeDirectory: {eq: "languages"}}) {
+      edges {
+        node {
+          relativePath
+          name
+          childImageSharp {
+            fluid {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+      }
+    }
+  }
+`

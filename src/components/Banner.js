@@ -1,9 +1,10 @@
 import React from "react";
 import Typed from 'react-typed';
 import ProfileCard from "./ProfileCard"
-import banner from "../images/banner.jpg"
 import styles from "./Parallax.module.css"
-import { Parallax } from 'react-parallax';
+import { Parallax, Background  } from 'react-parallax';
+import Img from "gatsby-image";
+import { getExtraHeight, findFluidImage } from "../utils/utils"
 
 let columnStyle = {
     maxWidth: 800,
@@ -11,15 +12,15 @@ let columnStyle = {
     alignItems: "center"
 }
 
-const Banner = () => {
+const Banner = (props) => {
+    let banner = findFluidImage(props.images, "banner.jpg");
     return (
         <Parallax
             strength={-500}
-            bgImage={banner}
-            bgImageStyle={{
-                minWidth: 1000
-            }}
         >
+            <Background className="custom-bg">
+                    <Img style={{height: `calc(100vh + ${getExtraHeight(-500)}px)`, width:"100vw", minWidth:1000}} fluid={banner.node.childImageSharp.fluid} />
+            </Background>
             <section className="hero is-fullheight">
             <div className={`hero-body ${styles.inverted}`}>
                 <div className={`container`}>
@@ -48,4 +49,6 @@ const Banner = () => {
             </section>
         </Parallax>
 )};
+
+
 export default Banner;

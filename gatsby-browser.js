@@ -8,7 +8,7 @@
 import React from "react";
 import { silentAuth } from "./src/utils/auth";
 import { toast } from 'react-toastify';
-import { library, config } from '@fortawesome/fontawesome-svg-core';
+import { config } from '@fortawesome/fontawesome-svg-core';
 
 class SessionCheck extends React.Component {
   constructor(props) {

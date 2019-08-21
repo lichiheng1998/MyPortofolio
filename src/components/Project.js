@@ -10,6 +10,8 @@ import Slider from "react-slick";
 import Fade from 'react-reveal/Fade';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import PerfectScrollbar from 'react-perfect-scrollbar';
+import { findFluidImage } from "../utils/utils";
+import Img from "gatsby-image";
 
 let textOrder = 2;
 let demoOrder = 1;
@@ -28,7 +30,6 @@ const sliderSettings = {
     autoplay: true,
     autoplaySpeed: 2000
 }
-let imageContext = require.context("../images/snapshots/", false, /\.jpg$/);
 class Project extends React.Component {
     constructor(){
         super();
@@ -48,8 +49,9 @@ class Project extends React.Component {
         this.components = Object.keys(projects).map((key) => {
             let images = [];
             for(let i = 1; i <= projects[key].numSnap; i++){
+                let image = findFluidImage(self.props.images, `${key}_${i}.jpg`);
                 images.push(
-                    <img key={i} alt="Project snapshot" src={imageContext(`./${key}_${i}.jpg`)} />
+                    <Img key={i} alt="Project snapshot" fluid={image.node.childImageSharp.fluid} />
                 );
             };
             let buttons = projects[key].tech.map((name) => {

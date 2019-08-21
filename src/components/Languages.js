@@ -4,6 +4,7 @@ import RollingCard from "./RollingCard";
 import languages from "../models/languages";
 import Slider from "react-slick";
 import Fade from "react-reveal/Fade";
+import { findFluidImage } from "../utils/utils"
 
 class Languages extends React.Component {
     constructor(){
@@ -48,9 +49,11 @@ class Languages extends React.Component {
     render(){
         let component = null;
         if(this.state.render){
+            let self = this;
             component = Object.keys(languages).map((lang)=>{
+                let image = findFluidImage(self.props.images, `${lang}.png`);
                 return (
-                    <RollingCard key={lang} name={lang} num={languages[lang].proficiency} imgUrl={require(`../images/${lang}.png`)} />
+                    <RollingCard key={lang} name={lang} img={image} num={languages[lang].proficiency}/>
                 );
             });
         }
