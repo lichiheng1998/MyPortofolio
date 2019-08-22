@@ -78,7 +78,7 @@ class Upload extends React.Component {
             return prev;
         })
         var xhttp = new XMLHttpRequest();
-        xhttp.open("POST", 'http://ec2-18-222-3-141.us-east-2.compute.amazonaws.com:5000/upload', true);
+        xhttp.open("POST", 'https://api.chihengli.me:443/upload', true);
 
         //Send the proper header information along with the request
         xhttp.setRequestHeader("Content-Type", "application/json");
