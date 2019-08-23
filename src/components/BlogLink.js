@@ -33,7 +33,6 @@ class BlogLink extends React.Component {
     }
 
     toEditPage(){
-        console.log(this.props.data);
         if(isAuthenticated()){
             navigate("/update", { state: {data: this.props.data} });
         } else {
