@@ -40,14 +40,11 @@ const auth = isBrowser
   }
 
   const setSession = (cb = () => {}, flag) => (err, authResult) => {
-    console.log("-------------");
-    console.log(err);
     if (err) {
       navigate("/");
       cb();
       return;
     }
-    console.log(authResult);
     if (authResult && authResult.accessToken && authResult.idToken) {
       let expiresAt = authResult.expiresIn * 1000 + new Date().getTime();
       tokens.accessToken = authResult.accessToken;
@@ -63,7 +60,6 @@ const auth = isBrowser
   }
 
   export const handleAuthentication = () => {
-      console.log("handleAuthentication");
     if (!isBrowser) {
       return;
     }
@@ -76,7 +72,6 @@ const auth = isBrowser
   }
 
   export const silentAuth = callback => {
-    console.log("silentAuth");
     if (!isAuthenticated()) return callback();
     auth.checkSession({}, setSession(callback, true));
   }

@@ -5,24 +5,22 @@ import Helmet from 'react-helmet';
 import Navbar from "../components/Navbar";
 import UploadForm from "../components/UploadForm";
 import * as Showdown from "showdown";
+import { navigate } from "gatsby";
 
-class Upload extends React.Component {
+class Update extends React.Component {
     _isMounted = false;
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.converter = new Showdown.Converter({
           tables: true,
           simplifiedAutoLink: true,
           strikethrough: true,
           tasklists: true
         });
+        let state = this.props.location.state;
+        let data = state ? state.data : null;
         this.state = {
-            data: {
-                author: getProfile().nickname,
-                title: "",
-                content: "",
-                description: "",
-            },
+            data: data,
             isLoading: false
         }
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -61,7 +59,6 @@ class Upload extends React.Component {
         if (event) {
             event.preventDefault();
         }
-
         if (this.state.isLoading) {
             return;
         }
@@ -76,7 +73,7 @@ class Upload extends React.Component {
             return prev;
         })
         var xhttp = new XMLHttpRequest();
-        xhttp.open("POST", `${process.env.API_DOMAIN}/posts`, true);
+        xhttp.open("PATCH", `${process.env.API_DOMAIN}/posts`, true);
         //Send the proper header information along with the request
         xhttp.setRequestHeader("Content-Type", "application/json");
         xhttp.setRequestHeader("Authorization", `Bearer ${tokens.accessToken}`);
@@ -90,28 +87,31 @@ class Upload extends React.Component {
                     })
                 }
                 if (this.status === 200) {
-                    toast.success("Upload the post successfully!", {
+                    toast.success("Update the post successfully!", {
                         position: toast.POSITION.TOP_CENTER
                     });
                 } else {
-                    toast.error("Can't upload!", {
+                    toast.error("Can't update!", {
                         position: toast.POSITION.TOP_CENTER
                     });
                 }
             }
         };
-
         xhttp.send(JSON.stringify(this.state.data));
     }
 
     render(){
+        if (!this.state.data) {
+            navigate("/blogs");
+            return <p>Redirecting to blog...</p>
+        }
         if (!isAuthenticated()) {
             login();
             return <p>Redirecting to login...</p>
         }
         return (
             <div>
-                <Navbar logo="Upload New Post"/>
+                <Navbar logo="Update Post"/>
                 <Helmet htmlAttributes={{style: 'background-color : whitesmoke'}}/>
                 <div style={{justifyContent: "center"}} className=" hero is-flex section is-fullheight">
                     <div style={{
@@ -131,4 +131,4 @@ class Upload extends React.Component {
     }
 }
 
-export default Upload;
+export default Update;

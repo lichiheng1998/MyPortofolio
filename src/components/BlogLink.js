@@ -3,9 +3,10 @@ import { wrapper2 } from "./Planguages.module.css";
 import { blogInfo, blogAnimate } from "./Blog.module.css";
 import Blog from "./Blog"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBookOpen, faBook } from '@fortawesome/free-solid-svg-icons';
+import { faBookOpen, faBook, faEdit } from '@fortawesome/free-solid-svg-icons';
 import Fade from 'react-reveal/Fade';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { Link } from "gatsby";
 import "./BlogAnimate.css";
 
 const desStyle = {
@@ -21,7 +22,6 @@ class BlogLink extends React.Component {
         this.state = { isOpen: false };
         this.toggle = this.toggle.bind(this);
     }
-
     toggle(){
         this.setState((prev) => {
             prev.isOpen = !prev.isOpen;
@@ -39,20 +39,34 @@ class BlogLink extends React.Component {
         return (
             <Fade big>
                 <div className={`${wrapper2} ${blogAnimate} box`}>
+                    <strong className="is-size-4 is-size-5-mobile">{data.title}</strong>
                     <div className="columns is-vcentered is-marginless is-mobile">
                         <div className="column is-paddingless">
-                            <strong className="is-size-4 is-size-5-mobile">{data.title}</strong>
                             <div className={blogInfo}>
-                                <strong style={{color: "#9C9C9C"}}>{data.author}</strong> <small style={{color: "#C0C0BE"}}>{time}</small>
+                                <strong style={{color: "#9C9C9C"}}>{data.author}</strong><br/><small style={{color: "#C0C0BE"}}>{time}</small>
                             </div>
                         </div>
                         <div className="column is-narrow">
-                            <div onClick={this.toggle} className="button is-link is-rounded level-item">
-                                <span className="is-size-7">{buttonText}</span>
-                                <span className="icon">
-                                    <FontAwesomeIcon icon={buttonIcon} />
-                                </span>
-                            </div>
+                            <nav className="breadcrumb" aria-label="breadcrumbs">
+                                  <ul>
+                                    <li>
+                                        <a onClick={this.toggle} href="#">
+                                          <span className="icon is-small">
+                                                <FontAwesomeIcon icon={buttonIcon} />
+                                          </span>
+                                          <span>{buttonText}</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <Link to="/update" state={{ data: data }}>
+                                          <span className="icon is-small has-text-success">
+                                                <FontAwesomeIcon icon={faEdit} />
+                                          </span>
+                                          <span className="has-text-success">Edit</span>
+                                        </Link>
+                                    </li>
+                                  </ul>
+                            </nav>
                         </div>
                     </div>
                     <p style={desStyle}>{data.description}</p>
