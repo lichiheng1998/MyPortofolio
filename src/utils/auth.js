@@ -73,6 +73,7 @@ const auth = isBrowser
   }
 
   export const silentAuth = callback => {
+    console.log("silentAuth");
     if (!isAuthenticated()) return callback();
     auth.checkSession({}, setSession(callback, true));
   }
