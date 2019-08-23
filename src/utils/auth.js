@@ -45,7 +45,7 @@ const auth = isBrowser
       cb();
       return;
     }
-
+    console.log(authResult);
     if (authResult && authResult.accessToken && authResult.idToken) {
       let expiresAt = authResult.expiresIn * 1000 + new Date().getTime();
       tokens.accessToken = authResult.accessToken;
