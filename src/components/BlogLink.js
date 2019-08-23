@@ -33,8 +33,9 @@ class BlogLink extends React.Component {
     }
 
     toEditPage(){
+        console.log(this.props.data);
         if(isAuthenticated()){
-            navigate("/update", { data: this.props.data });
+            navigate("/update", { state: {data: this.props.data} });
         } else {
             toast.warning("Please login in first.", {
                 position: toast.POSITION.TOP_CENTER
