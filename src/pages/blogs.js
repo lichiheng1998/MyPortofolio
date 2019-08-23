@@ -73,7 +73,7 @@ class blogs extends React.Component {
         });
 
         headroom.init();
-        fetch("https://api.chihengli.me:443/posts").then(results => {
+        fetch(`${process.env.API_DOMAIN}/posts`).then(results => {
             return results.json();
         }).then(data => {
             if(this._isMounted && data){

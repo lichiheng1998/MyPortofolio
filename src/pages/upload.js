@@ -16,7 +16,7 @@ class Upload extends React.Component {
           strikethrough: true,
           tasklists: true
         });
-
+        console.log(getProfile());
         this.state = {
             data: {
                 author: getProfile().nickname,
@@ -52,6 +52,7 @@ class Upload extends React.Component {
     }
 
     checkValidity(){
+        console.log(this.state.data);
         let isValid = Object.values(this.state.data).reduce((a, b)=>{
             return a && b;
         });
@@ -72,14 +73,12 @@ class Upload extends React.Component {
             });
             return;
         }
-
         this.setState((prev) => {
             prev.isLoading = true;
             return prev;
         })
         var xhttp = new XMLHttpRequest();
-        xhttp.open("POST", 'https://api.chihengli.me:443/upload', true);
-
+        xhttp.open("POST", `${process.env.API_DOMAIN}/upload`, true);
         //Send the proper header information along with the request
         xhttp.setRequestHeader("Content-Type", "application/json");
         xhttp.setRequestHeader("Authorization", `Bearer ${tokens.accessToken}`);
