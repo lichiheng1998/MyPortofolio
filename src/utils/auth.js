@@ -40,6 +40,8 @@ const auth = isBrowser
   }
 
   const setSession = (cb = () => {}, flag) => (err, authResult) => {
+    console.log("-------------");
+    console.log(err);
     if (err) {
       navigate("/");
       cb();
@@ -61,6 +63,7 @@ const auth = isBrowser
   }
 
   export const handleAuthentication = () => {
+      console.log("handleAuthentication");
     if (!isBrowser) {
       return;
     }
