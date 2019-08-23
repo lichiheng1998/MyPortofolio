@@ -1,5 +1,5 @@
 import React from "react";
-import { login, isAuthenticated, tokens , getProfile } from "../utils/auth";
+import { login, isAuthenticated, tokens } from "../utils/auth";
 import { toast } from 'react-toastify';
 import Helmet from 'react-helmet';
 import Navbar from "../components/Navbar";
@@ -46,6 +46,10 @@ class Update extends React.Component {
 
     componentDidMount(){
         this._isMounted = true;
+        if (!this.state.data) {
+            navigate("/blogs");
+            return <p>Redirecting to blog...</p>
+        }
     }
 
     checkValidity(){
@@ -101,10 +105,6 @@ class Update extends React.Component {
     }
 
     render(){
-        if (!this.state.data) {
-            navigate("/blogs");
-            return <p>Redirecting to blog...</p>
-        }
         if (!isAuthenticated()) {
             login();
             return <p>Redirecting to login...</p>

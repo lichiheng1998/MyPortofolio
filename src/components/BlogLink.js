@@ -6,8 +6,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookOpen, faBook, faEdit } from '@fortawesome/free-solid-svg-icons';
 import Fade from 'react-reveal/Fade';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import { Link } from "gatsby";
+import { isAuthenticated } from "../utils/auth";
 import "./BlogAnimate.css";
+import { toast } from 'react-toastify';
+import { navigate } from "gatsby";
 
 const desStyle = {
     backgroundColor: "whitesmoke",
@@ -21,12 +23,23 @@ class BlogLink extends React.Component {
         super();
         this.state = { isOpen: false };
         this.toggle = this.toggle.bind(this);
+        this.toEditPage = this.toEditPage.bind(this);
     }
     toggle(){
         this.setState((prev) => {
             prev.isOpen = !prev.isOpen;
             return prev;
         });
+    }
+
+    toEditPage(){
+        if(isAuthenticated()){
+            navigate("/upload", { data: this.props.data });
+        } else {
+            toast.warning("Please login in first.", {
+                position: toast.POSITION.TOP_CENTER
+            });
+        }
     }
 
     render(){
@@ -50,7 +63,7 @@ class BlogLink extends React.Component {
                             <nav className="breadcrumb" aria-label="breadcrumbs">
                                   <ul>
                                     <li>
-                                        <a onClick={this.toggle} href="#">
+                                        <a onClick={this.toggle}>
                                           <span className="icon is-small">
                                                 <FontAwesomeIcon icon={buttonIcon} />
                                           </span>
@@ -58,12 +71,12 @@ class BlogLink extends React.Component {
                                         </a>
                                     </li>
                                     <li>
-                                        <Link to="/update" state={{ data: data }}>
+                                        <a onClick={this.toEditPage}>
                                           <span className="icon is-small has-text-success">
                                                 <FontAwesomeIcon icon={faEdit} />
                                           </span>
                                           <span className="has-text-success">Edit</span>
-                                        </Link>
+                                        </a>
                                     </li>
                                   </ul>
                             </nav>
