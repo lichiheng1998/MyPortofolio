@@ -4,7 +4,7 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faUserCircle, faFilePdf } from '@fortawesome/free-solid-svg-icons';
 import burger from "./Navbar.module.css";
 import {SlideDown} from 'react-slidedown';
-import { Link } from "gatsby";
+import { StaticQuery, graphql, Link } from "gatsby";
 import { login, isAuthenticated, logout } from "../utils/auth";
 import 'react-slidedown/lib/slidedown.css';
 
@@ -19,6 +19,7 @@ class Navbar extends React.Component{
             isActive: false
         }
         this.clickHandler = this.clickHandler.bind(this);
+        this.render_with_data = this.render_with_data.bind(this);
     }
 
     componentDidMount(){
@@ -41,7 +42,7 @@ class Navbar extends React.Component{
         });
     }
 
-    render(){
+    render_with_data(data){
         let button = isAuthenticated() ? (
             <span onClick={logout} className="button is-danger is-outlined">
               <span className="icon">
@@ -58,8 +59,8 @@ class Navbar extends React.Component{
             </span>
         );
         let extra = this.state.isActive ? "is-active" : "";
-        return (
-            <header style={{zIndex: 10}} className="headroom is-fixed-top">
+        return(
+                <header style={{zIndex: 10}} className="headroom is-fixed-top">
                 <nav className="navbar">
                 <div className="navbar-brand">
                   <span className="navbar-item is-size-5">
@@ -81,7 +82,7 @@ class Navbar extends React.Component{
                           Blog
                         </Link>
                         <span className="navbar-item is-paddingless">
-                            <a className="button is-black is-inverted" href={this.props.resume.publicURL} download>
+                            <a className="button is-black is-inverted" href={data.resume.publicURL} download>
                                 <span className="icon">
                                   <FontAwesomeIcon icon={faFilePdf} />
                                 </span>
@@ -104,6 +105,22 @@ class Navbar extends React.Component{
                     </SlideDown>
                 </nav>
             </header>
+        )
+    }
+
+    render(){
+        return (
+            <StaticQuery
+                query={graphql`
+                  query {
+                    resume: file(name: {eq: "resume" }) {
+                        publicURL
+                    }
+                  }`
+                }
+                render={this.render_with_data}
+            />
+
         )
     }
 }
