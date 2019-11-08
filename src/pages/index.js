@@ -21,7 +21,7 @@ const IndexPage = ({data}) => (
           <title>Chiheng Li's Website</title>
           <link rel="canonical" href="http://mysite.com/example" />
         </Helmet>
-        <Navbar />
+        <Navbar resume={data.resume}/>
         <Banner images={data.bannerImages}/>
         <MyTimeline />
         <Skills images={data.languageImages}/>
@@ -35,6 +35,9 @@ export default IndexPage;
 
 export const query = graphql`
   query {
+    resume: file(name: {eq: "resume" }) {
+        publicURL
+    }
     bannerImages: allFile(filter: {relativeDirectory: {eq: "banners"}}) {
       edges {
         node {

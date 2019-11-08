@@ -1,7 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faUserCircle, faFilePdf } from '@fortawesome/free-solid-svg-icons';
 import burger from "./Navbar.module.css";
 import {SlideDown} from 'react-slidedown';
 import { Link } from "gatsby";
@@ -80,7 +80,15 @@ class Navbar extends React.Component{
                         <Link activeStyle={activeStyle} to="/blogs" className="navbar-item">
                           Blog
                         </Link>
-                        <span className="navbar-item">
+                        <span className="navbar-item is-paddingless">
+                            <a className="button is-black is-inverted" href={this.props.resume.publicURL} download>
+                                <span className="icon">
+                                  <FontAwesomeIcon icon={faFilePdf} />
+                                </span>
+                                <span>Resume</span>
+                            </a>
+                        </span>
+                        <span className="navbar-item  is-paddingless">
                           <a href="https://github.com/lichiheng1998" className="button is-link is-inverted">
                             <span className="icon">
                               <FontAwesomeIcon icon={faGithub} />
